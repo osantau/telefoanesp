@@ -1,0 +1,21 @@
+<span>
+    <c:choose>
+        <c:when test="${pageListHolder.firstPage}">Prev</c:when>
+        <c:otherwise><a href="${pageurl}/prev" style="padding: 5px;">Prev</a></c:otherwise>
+    </c:choose>     
+</span>
+<span>
+    <c:forEach begin="0" end="${pageListHolder.pageCount-1}" varStatus="loop">       
+        <c:choose>
+            <c:when test="${loop.index == pageListHolder.page}">${loop.index+1}</c:when>
+            <c:otherwise><a href="${pageurl}/${loop.index}" style="padding: 5px;">${loop.index+1}</a></c:otherwise>
+        </c:choose>
+
+    </c:forEach>
+</span>
+<span>
+    <c:choose>
+        <c:when test="${pageListHolder.lastPage}">Next</c:when>
+        <c:otherwise><a href="${pageurl}/next" style="padding: 5px;">Next</a></c:otherwise>
+    </c:choose>
+</span>

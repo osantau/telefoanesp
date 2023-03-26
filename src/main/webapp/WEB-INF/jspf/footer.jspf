@@ -1,0 +1,57 @@
+<div class="footer">
+    <p>
+        Pentru sugestii sau orice alte probleme contactati <a
+            href="mailto:it@plastor.ro">it@plastor.ro</a>
+    </p>
+    <p>
+        &copy;Copyright
+        <%= new java.text.SimpleDateFormat("yyyy").format(new java.util.Date())%>
+        - <a href="mailto:it@plastor.ro"
+             title="Servicul Tehnologia Informatiei">Servicul Tehnologia
+            Informatiei</a>
+    </p>
+</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#faq_search_input").focus();
+        $("#faq_search_input").livesearch({
+            searchCallback: function(term) {
+                //browser compatibility                                 
+                if ($.browser.msie || $.browser.webkit) {
+                    $("#faq_search_input").keydown(function(e) {
+                        if (e.keyCode == 8)
+                            $('.gbox').html("").show();
+                        else if (e.keyCode == 13)
+                            e.preventDefault();
+                    });
+                } else {
+                    $("#faq_search_input").keypress(function(e) {
+                        if (e.keyCode == 8)
+                            $('.gbox').html("").show();
+                        else if (e.keyCode == 13)
+                            e.preventDefault();
+                    });
+                }
+                //end browser compatibility
+                if (term.length >= 2) {
+                    $.ajax({
+                        type: "POST",
+                        url: "<c:url value="/search"/>",
+                                data: "keyword=" + term,
+                        success: function(response)
+                        {
+                            console.log(response);
+                            $('.gbox').html(response).show();
+                        }
+                    });
+                } else if (term.length == 1)
+                    $('.gbox').html("").show();
+            },
+            innerText: "",
+            queryDelay: 250,
+            minimumSearchLength: 2
+        });
+    });</script>
+</body>
+</html>
