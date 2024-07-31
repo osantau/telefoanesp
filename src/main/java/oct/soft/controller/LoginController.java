@@ -60,7 +60,7 @@ public class LoginController {
         } else {
             if (!userDetails.getPassword().equals(password)) {
                 hasErrors = true;
-                errors.put("wronPassword", "Parola nu se potriveste cu utilizatorul!");
+                errors.put("wrongPassword", "Parola nu se potriveste cu utilizatorul!");
             }
         }
         if (hasErrors) {
@@ -72,7 +72,7 @@ public class LoginController {
         SecurityContext sc = SecurityContextHolder.getContext();
         sc.setAuthentication(auth);
         HttpSession session = request.getSession(true);
-        session.setAttribute("SPRING_SECURITY_CONTET", sc);
+        session.setAttribute("SPRING_SECURITY_CONTEXT", sc);
         return "redirect:/";
     }
 }
